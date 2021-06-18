@@ -37,17 +37,15 @@ android {
         }
     }
 
-    flavorDimensions "default"
+    flavorDimensions 'version'
     productFlavors {
-        fake {
-            applicationIdSuffix ".fake"
-            versionNameSuffix "-fake"
-            buildConfigField "String", "TYPE", '"FAKE"'
+        forUsage {
+            applicationIdSuffix ".forUsage"
+            versionNameSuffix ".forUsage"
         }
-        real {
-            applicationIdSuffix ".real"
-            versionNameSuffix "-real"
-            buildConfigField "String", "TYPE", '"REAL"'
+        forTesting {
+            applicationIdSuffix ".forTesting"
+            versionNameSuffix ".forTesting"
         }
     }
 }
@@ -65,10 +63,12 @@ dependencies {
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
+    androidTestImplementation "com.android.support.test.espresso:espresso-intents:3.0.2"
+
     //Mockito
-    testImplementation "org.mockito:mockito-core:2.19.0"
-    testImplementation 'org.mockito:mockito-inline:2.8.9'
-    testImplementation('com.nhaarman:mockito-kotlin:1.5.0') {
+    testImplementation "org.mockito:mockito-core:3.11.0"
+    testImplementation 'org.mockito:mockito-inline:3.11.0'
+    testImplementation('com.nhaarman:mockito-kotlin:1.6.0') {
         exclude group: 'org.jetbrains.kotlin'
         exclude group: 'org.mockito'
     }
