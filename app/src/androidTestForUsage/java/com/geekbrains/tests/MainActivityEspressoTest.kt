@@ -58,7 +58,7 @@ class MainActivityEspressoTest {
 
     @Test
     fun activityEditText_IsDisplayed() {
-        onView(withId(R.id.searchEditText)).check(matches(isDisplayed()))
+        view_isDisplayed(R.id.searchEditText)
     }
 
     @Test
