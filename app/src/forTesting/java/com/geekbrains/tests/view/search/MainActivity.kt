@@ -37,8 +37,24 @@ class MainActivity : AppCompatActivity(), ViewSearchContract {
         toDetailsActivityButton.setOnClickListener {
             startActivity(DetailsActivity.getIntent(this, totalCount))
         }
+        searchButton.setOnClickListener{
+            if (!searchEditTextIsEmpty(searchEditText)) presenter.searchGitHub(searchEditText.text.toString())
+        }
         setQueryListener()
         setRecyclerView()
+    }
+
+    private fun searchEditTextIsEmpty(searchEditText: android.widget.EditText): Boolean {
+        val query = searchEditText.text.toString()
+        return if (query.isNotBlank()) false
+        else {
+            Toast.makeText(
+                this@MainActivity,
+                getString(R.string.enter_search_word),
+                Toast.LENGTH_SHORT
+            ).show()
+            true
+        }
     }
 
     private fun setRecyclerView() {
@@ -66,13 +82,7 @@ class MainActivity : AppCompatActivity(), ViewSearchContract {
         })
     }
 
-    private fun createRepository(): RepositoryContract {
-        return if (BuildConfig.TYPE == FAKE) {
-            FakeGitHubRepository()
-        } else {
-            GitHubRepository(createRetrofit().create(GitHubApi::class.java))
-        }
-    }
+    private fun createRepository(): RepositoryContract = FakeGitHubRepository()
 
     private fun createRetrofit(): Retrofit {
         return Retrofit.Builder()
