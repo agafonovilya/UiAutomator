@@ -12,10 +12,14 @@ internal class FakeGitHubRepository : RepositoryContract {
         query: String,
         callback: RepositoryCallback
     ) {
-        callback.handleGitHubResponse(Response.success(getFakeResponse()))
+        callback.handleGitHubResponse(Response.success(generateSearchResponse()))
     }
 
-    private fun getFakeResponse(): SearchResponse {
+    override suspend fun searchGithubAsync(query: String): SearchResponse {
+        return generateSearchResponse()
+    }
+
+    private fun generateSearchResponse(): SearchResponse {
         val list: MutableList<SearchResult> = mutableListOf()
         for (index in 1..100) {
             list.add(
