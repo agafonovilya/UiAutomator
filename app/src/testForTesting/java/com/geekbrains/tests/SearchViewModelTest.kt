@@ -55,7 +55,6 @@ class SearchViewModelTest {
         }
     }
 
-
     @Test
     fun coroutines_TestReturnValueIsNotNull() {
         testCoroutineRule.runBlockingTest {
