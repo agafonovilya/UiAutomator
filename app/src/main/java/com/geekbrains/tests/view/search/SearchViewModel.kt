@@ -16,7 +16,6 @@ class SearchViewModel(
     private val repository: RepositoryContract = GitHubRepository(
         Retrofit.Builder()
             .baseUrl(MainActivity.BASE_URL)
-            .addCallAdapterFactory(CoroutineCallAdapterFactory())
             .addConverterFactory(GsonConverterFactory.create())
             .build().create(GitHubApi::class.java)
     )
